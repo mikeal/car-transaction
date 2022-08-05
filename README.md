@@ -151,7 +151,8 @@ And of course, you can configure cloud functions to fire on every write,
   * and that produces a single index over *those transactions*,
   * and if we want to write multiple indexes for the same data we have two choices,
     * store the data again in two buckets (potentially discarding blocks in the transaction we don't need in the value)
-    * or take the hash of the transaction (CAR CID) and put that at the end of the key.
+    * or take the hash of the transaction (CAR CID) and put that at the end of the key with a zero byte value.
+      * which i don't think S3 knows how to charge you for other than per-request because they don't charge you for keyspace 🤩
     * which gives you the choice between paying for a copy of the data or eating the performance hit of a
       secondary read when you query those indexes.
  * and since all this data can easily be put on IPFS,
