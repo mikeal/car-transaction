@@ -16,7 +16,7 @@ const encode = value => {
   return Block.encode({ value, hasher: sha256, codec: dagcbor })
 }
 
-const decode = (bytes, cid) => {
+const decode = ({ bytes, cid }) => {
   let hasher, codec
   const { code } = cid
   const hashcode = cid.multihash.code || digest(cid.multihash).code
@@ -50,7 +50,7 @@ class Transaction {
   static async load (buffer) {
     const reader = await CarReader.fromBytes(buffer)
     const [ root ] = await reader.getRoots()
-    const get = cid => reader.get(cid).then(block => decode(block))
+    const get = cid => reader.get(cid).then(block => decode(block)).then(({ value }) => value )
     return { root, get }
   }
 
@@ -75,10 +75,8 @@ class Transaction {
     for (const block of this.blocks) {
       writer.write(block)
     }
-    writer.close()
-    console.log(writer)
-    console.log(buffer)
-    return buffer
+    await writer.close()
+    return writer.bytes
   }
 }
 
