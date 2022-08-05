@@ -29,14 +29,21 @@ run()
 
 # Guide to IPLD-over-ObjectStores (S3, R2, etc)
 
+This is how we build a decentralized web of all web3 application
+data on top of widely available and competitively priced
+cloud object stores.
+
 IPLD is the data structure layer beneath IPFS. It works in IPFS
 protocols and outside them, on disc, in memory, etc.
 
 So you can build these little merkle trees with the library above that
-* are encoded in `dag-cbor`, which is fairly efficient
+* are encoded in `dag-cbor`, which is fairly efficient format,
+* and you get the de-duplication and diffing properties of git,
+* and all the cool graph things you can do with graph databases,
+* and all the hash addressed web3 and blockchain stuff works and interops,
 * and those transactions are encoded in a well known format called CAR (kinda like git-pack files for IPFS),
-  * and we just released this open source project that is a cloud native implementation of IPFS
-  * so if you want to put these on AWS, all you need is a way to feed URL's to CAR files
+  * and we just released this open source project that is a [cloud native implementation of IPFS](https://github.com/elastic-ipfs)
+  * so if you want to put these on AWS, all you need is a way to store CAR files and hand the URL to Elastic IPFS
     into this cloud native thing, which is pretty much as hard to operate as all the other cloud native things.
   * but if you don't want to run it yourself but you do want your data in the IPFS network
     just DM me on twitter (@mikeal) and we'll figure something out, because we're already running
