@@ -209,6 +209,13 @@ cool things within these nested sorting structures.
   from maintaining a secondary index of permissions
   * cause cryptography is really cool like that.
 
+Just remember, 
+* you'll want to get *something* with a hash in it into something before `/` when you
+derive the key, that'll force distribution across all the key's you're writing.
+* And if you wnat to **optimize** for the reader, you'll need back that into the entire prefix ahead of each
+`/` you stick in the key. 
+
+Working within those two constraints you can optimize each index for your particular use case.
 
 And there's more, but I'm tired of typing, and I think that the next set of things I write about this will
 include examples of cool things others are doing with what is already here. Happy hacking!
