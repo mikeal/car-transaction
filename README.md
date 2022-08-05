@@ -4,7 +4,7 @@ IPLD transaction as CAR buffer
 
 ## Usage
 
-```
+```js
 import Transaction from 'car-transaction' 
 
 const run = async () => {
