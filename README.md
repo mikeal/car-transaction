@@ -16,6 +16,7 @@ const run = async () => {
   const buffer = await t.commit()
 
   // read a transaction
+  // the last write is always the root
   const { root, get } = await Transaction.load(buffer)
   // root is a cid
   const { sub } = await get(root)
