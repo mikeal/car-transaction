@@ -68,8 +68,11 @@ Conceptually, you can think of IPLD-over-ObjectStores as being
   * that are key/value stores,
   * with a single index,
     * with a fairly powerful query language,
+    * that can implement some interesting privacy and access patterns,
+      * cause **hashes.**
   * that can represent an IPLD "network,"
   * an IPLD replication set,
+
 And each instance of an ObjectStore can be all of these things ***simultaneously***.
 
 All these services have a roughly equivalent interface
