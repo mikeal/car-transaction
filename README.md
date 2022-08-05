@@ -1,6 +1,6 @@
 # car-transaction
 
-IPLD transaction as CAR buffer
+IPLD transaction as CAR buffer that can be used as a database transaction.
 
 ## Usage
 
