@@ -37,7 +37,7 @@ IPLD is the data structure layer beneath IPFS. It works in IPFS
 protocols and outside them, on disc, in memory, etc.
 
 So you can build these little merkle trees with the library above that
-* are encoded in `dag-cbor`, which is fairly efficient format,
+* are encoded in `dag-cbor`, a fairly efficient format,
 * and all the hash addressed web3 and blockchain stuff works and interops,
 * and it's as easy as working with JSON,
   * with inline binary,
