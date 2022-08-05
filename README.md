@@ -178,6 +178,10 @@ And it can do this across
   * the same cloud provider,
   * different providers,
   * p2p networks,
+  * local nodes
+    * disc
+    * memory
+    * browsers
   * that's entirely up to you.
 
 And that string key we're using for the index.
