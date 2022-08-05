@@ -186,9 +186,10 @@ Something I wish more people knew about, is this brilliant library Dominic Tarr 
 * who lives on a boat
 * and with an excited smile on his face will describe himself as a "cyber hobo."
 
-He wrote this library that implements the typewise/bytewise encoder/decoder in regular
-strings. So you can use it for the keys on these ObjectStores and then use the ListObject
-interfaces to write queries against it.
+He wrote [this library that implements the typewise/bytewise encoder/decoder in regular
+strings](https://github.com/dominictarr/charwise). 
+So you can use it for the keys on these ObjectStores and then use the ListObject
+interfaces to write queries against these more advanced sorting functions.
 
 You might be used to modelling you bucket keys to leverage the "file heirachy" in S3.
 These products tend to model this as a feature of '/' to trigger your familiarity with
