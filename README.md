@@ -97,9 +97,9 @@ Some of them do A LOT more, but they all have at least these properties:
   * Which is pretty different than some of the databases we're used to. Most open source databases
       have a local disc optimization in the file writer that, when you group data together like this, will
       get bulked together.
-  * But these big distributed things like S3, they keyspace is distributed across a bunch of machines,
-      so when they do a something similar on the read side, giving the keyspace locality, you lose the
-      distribution of your write across the whole database a bit.
+  * But these big distributed things like S3, the keyspace is distributed across a bunch of machines,
+      so when they do a similar optimization on the read side, adding locality to the keyspace, you lose the
+      distribution of your writes across the bucket.
   * But we're working with hashes!
   * We've got perfectly balanced distribution across a keyspace for days!
   * So if we key things by hash prefixes we'll always evenly distribute across the keyspace.
