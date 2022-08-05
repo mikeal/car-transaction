@@ -41,6 +41,13 @@ So you can build these little merkle trees with the library above that
 * and you get the de-duplication and diffing properties of git,
 * and all the cool graph things you can do with graph databases,
 * and all the hash addressed web3 and blockchain stuff works and interops,
+* and it's as easy as working with JSON,
+  * with inline binary,
+  * and you have these hash links that allow you to make little trees,
+  * which is how you can get de-duplication,
+  * and you can also link to git, bittorrent and ethereum data.
+  * you can even link to IPFS files in them,
+     or you can encode those IPFS files into the unixfs block format and include them in the transcations.
 * and those transactions are encoded in a well known format called CAR (kinda like git-pack files for IPFS),
   * and we just released this open source project that is a [cloud native implementation of IPFS](https://github.com/elastic-ipfs)
   * so if you want to put these on AWS, all you need is a way to store CAR files and hand the URL to Elastic IPFS
