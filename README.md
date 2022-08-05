@@ -110,49 +110,54 @@ Some of them do A LOT more, but they all have at least these properties:
     * `/$hash/data` for their keys in S3.
   * Because S3's performance docs said that performance was only limited "per prefix" which gave an indication into
     how they were optimizing some of this by looking at the '/' as a key prefix.
-  * I pointed about 4K Lambdas at open data encoding for the Filecoin launch, so i put a few Billion
-    keys into an S3 bucket this way, and when i went over a billion keys it got noticably faster. I had
+  * I pointed about 4K concurrent Lambdas at open data encoding for the Filecoin launch, each one writing thousands of individual blocks
+    this way, so i put a few Billion
+    keys into an S3 bucket as fast as it could take them, and when i went over a billion keys it got noticably faster. I had
     to ask AWS to raise the cap on our Lambdas (this is way easier now, and is per cloud formation stack)
 
 So we can really blow these things up with IPLD data.
 
-This means that, anything you build on this, is something pretty close to the fastest cloud database offering available
+This means that, anything you build on this is something pretty close to the fastest cloud database offering available
 * at whatever price these gigantic companies have driven the price down to in a rapidly commoditizing market.
   * that is now competing with blockchains like Filecoin
     * which you can also store those CAR files in natively.
 * Cloudflare even has free egress w/ R2, and it's cheaper than S3.
 * That's bananas! Free reads!
 * I've been at this a while, I wrote PouchDB in 2010, which apparently you could now configure to write to R2 and get free reads from a CDN!
-* Anyway, you can also write these little graphs into it.
+* Anyway, you can also write these little graphs into it and they are even more powerful.
 
-And, if you write a cloud function that derive a **single string key** from the transaction,
+And, if you write a cloud function that derives a **single string key** from the transaction,
 you've got a query language in all of these vendors for range queries across the index of that
 key 
 * that can return queries with or without the values included,
 * with pagination, 
-* and a bunch client of libraries that already exist,
-* and HTTP caching infra already built for them.
+* and a buncha client libraries that already exist,
+* and HTTP caching infra already built for them and integrated into these vendors.
+
+And if you stick to the rule of only deriving the key **from the data itself** you never bake outside
+context into the key that can't be replicated along with the data to another location when you need to
+solve a new problem.
 
 And of course, you can configure cloud functions to fire on every write,
 * so you can do filtered replication to other buckets and datasources
 * which can create new transactions using the same library above
 * each of which will inherit all the same replication abilities of this database,
-* so there's no longer any differentiation between the capabilties of primary stores and indexes.
-* because we're not building flat databasea anymore,
+* so there's **no longer any differentiation between the capabilties of primary stores and indexes**.
+* because we're not building flat databases anymore,
   * this is much more useful, and way cooler,
   * we're just writing branches of gigantic graphs to little (or huge!) transaction tables,
   * so don't think of it as a KV store, the key AND THE VALUE are in or derived from the value data,
-  * and that produces single index over those transaction,
-    * and if we want to write multiple indexes for the same data we have two choices,
-      * store the data again in two buckets (potentially filtered if we don't need everything in the transaction)
-      * or take the hash of the transaction (CAR CID) and put that at the end of the key.
-      * which gives you the choice between paying for a copy of the data or eating the performance hit of a
-        secondary ready when you query the indexes you don't write additinoal copies to.
+  * and that produces a single index over *those transactions*,
+  * and if we want to write multiple indexes for the same data we have two choices,
+    * store the data again in two buckets (potentially discarding blocks in the transaction we don't need in the value)
+    * or take the hash of the transaction (CAR CID) and put that at the end of the key.
+    * which gives you the choice between paying for a copy of the data or eating the performance hit of a
+      secondary read when you query those indexes.
  * and since all this data can easily be put on IPFS,
    * all the graphs you write can be read as a single graph by anyone who traverses it
    * and their graphs can link to yours
    * and vice versa
-   * and that's why we've been calling it Web3 this whole time.
+   * and that's why we've been calling it Web3 this whole time 
 * and it's not a blockchain
   * until you put a consensus layer over it.
   * so if you need this to be a blockchain thing,
