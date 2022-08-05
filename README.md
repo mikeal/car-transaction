@@ -191,12 +191,14 @@ strings](https://github.com/dominictarr/charwise).
 So you can use it for the keys on these ObjectStores and then use the ListObject
 interfaces to write queries against these more advanced sorting functions.
 
-You might be used to modelling you bucket keys to leverage the "file heirachy" in S3.
-These products tend to model this as a feature of '/' to trigger your familiarity with
+You might be used to modelling your bucket keys to leverage the "file heirachy" in S3.
+These products tend to describe this as a feature of '/' to trigger your familiarity with
 file directory heirarchy, which are more widely understood that something like typewise/bytewise.
+But under the hood they just implement regular utf8 string sorting, which gives the sorting properties
+you'd want in a '/' based directory heirarchy.
 
-What you get with these tools is **nested sorting** within any element of the keyspace
-in an arbitrary depth. First, just read the rules about [which JSON types get ordered where](https://github.com/deanlandolt/bytewise#order-of-supported-structures). Now, notice that sorting within objects and arrays enables the nesting of keys.
+What you get with `charwise` is **nested sorting** within any element of the keyspace
+to an arbitrary depth. First, just read the rules about [which JSON types get ordered where](https://github.com/deanlandolt/bytewise#order-of-supported-structures). Now, notice that sorting within objects and arrays enables the nesting of keys.
 
 So you can do something like 
 
@@ -208,7 +210,7 @@ So you can do something like
 
 And since, when you're working with these little graphs, they all have hash addresses, you get to do some
 cool things within these nested sorting structures.
-* Like if you want to make sure any part of it is evenly distributed, use a hash the describes the item
+* Like if you want to make sure any part of it is evenly distributed, use a hash that describes the item
   potency of the index.
 * And if you have some security or privacy context you're enforcing over reading the index, you put
   the hash of something they would need to know into the nested sorting structure, which saves you
@@ -218,7 +220,7 @@ cool things within these nested sorting structures.
 Just remember, 
 * you'll want to get *something* with a hash in it into something before `/` when you
 derive the key, that'll force distribution across all the key's you're writing.
-* And if you wnat to **optimize** for the reader, you'll need back that into the entire prefix ahead of each
+* And if you want to **optimize** for the reader, you'll need to bake that into the entire prefix ahead of each
 `/` you stick in the key. 
 
 Working within those two constraints you can optimize each index for your particular use case.
