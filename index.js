@@ -1,5 +1,4 @@
-import * as CBW from './node_modules/@ipld/car/esm/lib/buffer-writer.js'
-import { CarReader } from '@ipld/car'
+import { CarReader, CarBufferWriter as CBW } from '@ipld/car'
 import { bytes as byteslib } from 'multiformats'
 import { decode as digest } from 'multiformats/hashes/digest'
 import * as dagcbor from '@ipld/dag-cbor'
